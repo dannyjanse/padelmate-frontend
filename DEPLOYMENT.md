@@ -3,7 +3,7 @@
 ## Stap-voor-stap Deployment
 
 ### 1. Render.com Account
-- Ga naar [render.com](https://render.com)
+- Ga naar [render.com](githttps://render.com)
 - Maak een account aan of log in
 
 ### 2. Nieuwe Static Site
