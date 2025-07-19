@@ -327,9 +327,9 @@ const MatchNightDetails = () => {
     if (!matchNight?.matches) return [];
     
     return [...matchNight.matches].sort((a, b) => {
-      // Eerst sorteren op ronde (nieuwste bovenaan)
+      // Eerst sorteren op ronde (eerste ronde bovenaan)
       if (a.round !== b.round) {
-        return b.round - a.round;
+        return a.round - b.round;
       }
       
       // Dan sorteren op baan
