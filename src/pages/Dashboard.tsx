@@ -159,7 +159,7 @@ const Dashboard = () => {
       case 'completed':
         return <Trophy className="w-4 h-4 text-blue-600" />;
       default:
-        return <Calendar className="w-4 h-4 text-gray-400" />;
+        return <Calendar className="w-4 h-4 text-yellow-500" />;
     }
   };
 
@@ -170,7 +170,7 @@ const Dashboard = () => {
       case 'completed':
         return <span className="text-blue-600">Spel afgerond</span>;
       default:
-        return <span className="text-gray-500">Nog niet gestart</span>;
+        return <span className="text-yellow-600">Nog niet gestart</span>;
     }
   };
 

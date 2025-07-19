@@ -410,26 +410,26 @@ const MatchNightDetails = () => {
               {/* Status Badge */}
               <div className="flex items-center space-x-2">
                 {loadingGameStatus ? (
-                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                    <Clock className="w-5 h-5" />
-                    <span className="font-medium text-sm">Laden...</span>
+                  <div className="flex items-center space-x-2">
+                    <Clock className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm text-gray-600">Laden...</span>
                   </div>
                 ) : isGameCompleted() ? (
-                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                    <Trophy className="w-5 h-5" />
-                    <span className="font-medium text-sm">Spel Afgerond</span>
+                  <div className="flex items-center space-x-2">
+                    <Trophy className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm text-blue-600">Spel Afgerond</span>
                   </div>
                 ) : gameStatus?.game_active ? (
-                  <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
-                    <Play className="w-5 h-5" />
-                    <span className="font-medium text-sm">
+                  <div className="flex items-center space-x-2">
+                    <Play className="w-4 h-4 text-green-600" />
+                    <span className="text-sm text-green-600">
                       Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
                     </span>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                    <Clock className="w-5 h-5" />
-                    <span className="font-medium text-sm">Niet Gestart</span>
+                  <div className="flex items-center space-x-2">
+                    <Clock className="w-4 h-4 text-yellow-600" />
+                    <span className="text-sm text-yellow-600">Niet Gestart</span>
                   </div>
                 )}
               </div>
