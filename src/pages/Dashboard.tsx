@@ -263,9 +263,9 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Match Nights */}
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-gray-900">Padelavonden</h2>
+      {/* Match Nights Card */}
+      <div className="card">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Padelavonden</h2>
         
         {matchNights.length === 0 ? (
           <div className="text-center py-8">
@@ -284,7 +284,7 @@ const Dashboard = () => {
             {getSortedMatchNights().map((matchNight) => (
               <div
                 key={matchNight.id}
-                className="card hover:shadow-lg transition-shadow cursor-pointer p-3"
+                className="bg-gray-50 hover:bg-gray-100 rounded-lg p-3 transition-colors cursor-pointer border border-gray-200"
                 onClick={() => navigate(`/match-nights/${matchNight.id}`)}
               >
                 <div className="flex items-start justify-between mb-3">

@@ -363,66 +363,122 @@ const MatchNightDetails = () => {
     <div className="space-y-6">
       {/* Header Card */}
       <div className="card">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-              {formatDateTime(matchNight.date)}
-            </h1>
-            <div className="flex items-center space-x-4 text-gray-600 mt-1">
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-1" />
-                <span className="text-sm">{matchNight.location}</span>
+        <div className="flex flex-col space-y-4">
+          {/* Top row with title and status */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+                {formatDateTime(matchNight.date)}
+              </h1>
+              <div className="flex items-center space-x-4 text-gray-600 mt-1">
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">{matchNight.location}</span>
+                </div>
+                <div className="flex items-center">
+                  <Users className="w-4 h-4 mr-1" />
+                  <span className="text-sm">{matchNight.participants_count} deelnemers</span>
+                </div>
+                <div className="flex items-center">
+                  <Play className="w-4 h-4 mr-1" />
+                  <span className="text-sm">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Users className="w-4 h-4 mr-1" />
-                <span className="text-sm">{matchNight.participants_count} deelnemers</span>
-              </div>
-              <div className="flex items-center">
-                <Play className="w-4 h-4 mr-1" />
-                <span className="text-sm">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            {/* Status Badge */}
-            <div className="flex items-center space-x-2">
-              {loadingGameStatus ? (
-                <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                  <Clock className="w-5 h-5" />
-                  <span className="font-medium text-sm">Laden...</span>
-                </div>
-              ) : isGameCompleted() ? (
-                <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
-                  <Trophy className="w-5 h-5" />
-                  <span className="font-medium text-sm">Spel Afgerond</span>
-                </div>
-              ) : gameStatus?.game_active ? (
-                <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
-                  <Play className="w-5 h-5" />
-                  <span className="font-medium text-sm">
-                    Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
-                  </span>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                  <Clock className="w-5 h-5" />
-                  <span className="font-medium text-sm">Niet Gestart</span>
-                </div>
-              )}
             </div>
             
-            {/* Alleen creator kan bewerken - niet voor afgeronde spellen */}
-            {isCreator() && !isGameCompleted() && (
-              <button
-                onClick={() => navigate(`/match-nights/${id}/edit`)}
-                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
-                title="Bewerken"
-              >
-                <Edit className="w-4 h-4" />
-              </button>
-            )}
+            <div className="flex items-center space-x-4">
+              {/* Status Badge */}
+              <div className="flex items-center space-x-2">
+                {loadingGameStatus ? (
+                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                    <Clock className="w-5 h-5" />
+                    <span className="font-medium text-sm">Laden...</span>
+                  </div>
+                ) : isGameCompleted() ? (
+                  <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
+                    <Trophy className="w-5 h-5" />
+                    <span className="font-medium text-sm">Spel Afgerond</span>
+                  </div>
+                ) : gameStatus?.game_active ? (
+                  <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
+                    <Play className="w-5 h-5" />
+                    <span className="font-medium text-sm">
+                      Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                    <Clock className="w-5 h-5" />
+                    <span className="font-medium text-sm">Niet Gestart</span>
+                  </div>
+                )}
+              </div>
+              
+              {/* Alleen creator kan bewerken - niet voor afgeronde spellen */}
+              {isCreator() && !isGameCompleted() && (
+                <button
+                  onClick={() => navigate(`/match-nights/${id}/edit`)}
+                  className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
+                  title="Bewerken"
+                >
+                  <Edit className="w-4 h-4" />
+                </button>
+              )}
+            </div>
           </div>
+
+          {/* Action buttons - alleen tonen als spel niet is afgerond */}
+          {!isGameCompleted() && (
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2 border-t border-gray-100">
+              {/* Start Padelavond knop - alleen voor creator */}
+              {isCreator() && matchNight.participants_count >= 4 && !gameStatus?.game_active && (
+                <button
+                  onClick={() => setShowGameModal(true)}
+                  disabled={startingGame}
+                  className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
+                >
+                  <Play className="w-3 h-3" />
+                  <span>{startingGame ? 'Spel starten...' : 'Start Padelavond'}</span>
+                </button>
+              )}
+
+              {/* Nieuw Spel Starten button - alleen voor creator */}
+              {isCreator() && gameStatus?.game_active && (
+                <button
+                  onClick={() => setShowGameModal(true)}
+                  disabled={startingGame}
+                  className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
+                >
+                  <Play className="w-3 h-3" />
+                  <span>{startingGame ? 'Spel starten...' : 'Nieuw Spel Starten'}</span>
+                </button>
+              )}
+
+              {/* Spel afronden button - alleen voor creator tijdens actief spel */}
+              {isCreator() && gameStatus?.game_active && (
+                <button
+                  onClick={handleCompleteGame}
+                  disabled={completingGame}
+                  className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
+                >
+                  <CheckCircle className="w-3 h-3" />
+                  <span>{completingGame ? 'Afronden...' : 'Spel Afronden'}</span>
+                </button>
+              )}
+
+              {/* Recalculate stats button - alleen voor creator als er uitslagen zijn */}
+              {isCreator() && matchNight.matches && matchNight.matches.some(match => match.result) && (
+                <button
+                  onClick={handleRecalculateStats}
+                  disabled={recalculatingStats}
+                  className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                  <span>{recalculatingStats ? 'Herberekenen...' : 'Herbereken Stand'}</span>
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -430,63 +486,6 @@ const MatchNightDetails = () => {
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md">
           {error}
-        </div>
-      )}
-
-      {/* Actions - alleen tonen als spel niet is afgerond */}
-      {!isGameCompleted() && (
-        <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-          {/* Start Padelavond knop - alleen voor creator */}
-          {isCreator() && matchNight.participants_count >= 4 && !gameStatus?.game_active && (
-            <button
-              onClick={() => setShowGameModal(true)}
-              disabled={startingGame}
-              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
-            >
-              <Play className="w-3 h-3" />
-              <span>{startingGame ? 'Spel starten...' : 'Start Padelavond'}</span>
-            </button>
-          )}
-
-          {/* Nieuw Spel Starten button - alleen voor creator */}
-          {isCreator() && gameStatus?.game_active && (
-            <button
-              onClick={() => setShowGameModal(true)}
-              disabled={startingGame}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
-            >
-              <Play className="w-3 h-3" />
-              <span>{startingGame ? 'Spel starten...' : 'Nieuw Spel Starten'}</span>
-            </button>
-          )}
-
-          {/* Spel afronden button - alleen voor creator tijdens actief spel */}
-          {isCreator() && gameStatus?.game_active && (
-            <button
-              onClick={handleCompleteGame}
-              disabled={completingGame}
-              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
-            >
-              <CheckCircle className="w-3 h-3" />
-              <span>{completingGame ? 'Afronden...' : 'Spel Afronden'}</span>
-            </button>
-          )}
-
-          {/* Recalculate stats button - alleen voor creator als er uitslagen zijn */}
-          {isCreator() && matchNight.matches && matchNight.matches.some(match => match.result) && (
-            <button
-              onClick={handleRecalculateStats}
-              disabled={recalculatingStats}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
-            >
-              <RefreshCw className="w-3 h-3" />
-              <span>{recalculatingStats ? 'Herberekenen...' : 'Herbereken Stand'}</span>
-            </button>
-          )}
-
-
-
-
         </div>
       )}
 
