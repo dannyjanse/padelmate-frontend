@@ -128,14 +128,7 @@ const Login = () => {
             </button>
           </div>
 
-          <div className="text-center">
-            <Link
-              to="/register"
-              className="font-medium text-primary-600 hover:text-primary-500 text-sm"
-            >
-              Nog geen account? Registreer hier
-            </Link>
-          </div>
+
         </form>
       </div>
     </div>
