@@ -36,9 +36,7 @@ api.interceptors.response.use(
     // Alleen redirecten als het geen auth check is en geen login call
     if (error.response?.status === 401 && 
         !error.config.url?.includes('/api/auth/me') &&
-        !error.config.url?.includes('/api/auth/quick-login') &&
         !error.config.url?.includes('/api/auth/login')) {
-      localStorage.removeItem('user');
       window.location.href = '/login';
     }
     return Promise.reject(error);

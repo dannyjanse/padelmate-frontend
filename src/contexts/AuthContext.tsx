@@ -34,23 +34,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-        setUser(userData);
-        
-        // Check server session
-        try {
-          await authAPI.getCurrentUser();
-        } catch (error) {
-          console.log('Server session expired, clearing local storage');
-          localStorage.removeItem('user');
-          setUser(null);
-        }
-      }
+      // Check server session directly
+      const response = await authAPI.getCurrentUser();
+      setUser(response.data.user);
     } catch (error) {
       console.log('Not authenticated');
-      localStorage.removeItem('user');
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -59,12 +48,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (username: string, password: string) => {
     console.log('Login function called with:', username, password);
     try {
-      console.log('Making API call to quick-login...');
-      const response = await authAPI.quickLogin({ username, password });
+      console.log('Making API call to login...');
+      const response = await authAPI.login({ username, password });
       console.log('Login response:', response);
       const userData = response.data.user;
       setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -76,7 +64,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authAPI.register({ name, email, password });
       const userData = response.data.user;
       setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       throw error;
     }
@@ -89,7 +76,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.error('Logout error:', error);
     } finally {
       setUser(null);
-      localStorage.removeItem('user');
     }
   };
 
