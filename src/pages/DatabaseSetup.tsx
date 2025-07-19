@@ -117,7 +117,10 @@ const DatabaseSetup = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Database Setup</h1>
+      <div className="card mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Database Setup</h1>
+        <p className="text-gray-600 mt-1">Beheer database tabellen en test data</p>
+      </div>
       
       <div className="space-y-4">
         <div className="card">

@@ -103,8 +103,8 @@ const CreateMatchNight = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* Header */}
-      <div className="mb-8">
+      {/* Header Card */}
+      <div className="card mb-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
@@ -112,7 +112,7 @@ const CreateMatchNight = () => {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Terug
         </button>
-        <h1 className="text-3xl font-bold text-gray-900">Nieuwe Padelavond</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Nieuwe Padelavond</h1>
         <p className="text-gray-600 mt-1">Plan een nieuwe padelavond</p>
       </div>
 

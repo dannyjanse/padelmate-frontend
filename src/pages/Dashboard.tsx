@@ -222,35 +222,37 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-4">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-            Welkom, {user?.name}!
-          </h1>
-          <p className="text-sm text-gray-600 mt-1">Beheer je padelavonden</p>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-          <button
-            onClick={() => navigate('/match-nights/new')}
-            className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
-          >
-            <Plus className="w-3 h-3" />
-            <span>Nieuwe Padelavond</span>
-          </button>
+      {/* Header Card */}
+      <div className="card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              Welkom, {user?.name}!
+            </h1>
+            <p className="text-sm text-gray-600 mt-1">Beheer je padelavonden</p>
+          </div>
           
-          {/* Debug knop - alleen zichtbaar als er een fout is */}
-          {error && (
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
             <button
-              onClick={handleFixSchema}
-              disabled={fixingSchema}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-2 text-sm"
+              onClick={() => navigate('/match-nights/new')}
+              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <Wrench className="w-4 h-4" />
-              <span>{fixingSchema ? 'Bezig...' : 'Fix Database'}</span>
+              <Plus className="w-3 h-3" />
+              <span>Nieuwe Padelavond</span>
             </button>
-          )}
+            
+            {/* Debug knop - alleen zichtbaar als er een fout is */}
+            {error && (
+              <button
+                onClick={handleFixSchema}
+                disabled={fixingSchema}
+                className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-2 text-sm"
+              >
+                <Wrench className="w-4 h-4" />
+                <span>{fixingSchema ? 'Bezig...' : 'Fix Database'}</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

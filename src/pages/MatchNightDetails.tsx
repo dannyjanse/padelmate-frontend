@@ -361,66 +361,68 @@ const MatchNightDetails = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-            {formatDateTime(matchNight.date)}
-          </h1>
-          <div className="flex items-center space-x-4 text-gray-600 mt-1">
-            <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-1" />
-              <span className="text-sm">{matchNight.location}</span>
+      {/* Header Card */}
+      <div className="card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              {formatDateTime(matchNight.date)}
+            </h1>
+            <div className="flex items-center space-x-4 text-gray-600 mt-1">
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 mr-1" />
+                <span className="text-sm">{matchNight.location}</span>
+              </div>
+              <div className="flex items-center">
+                <Users className="w-4 h-4 mr-1" />
+                <span className="text-sm">{matchNight.participants_count} deelnemers</span>
+              </div>
+              <div className="flex items-center">
+                <Play className="w-4 h-4 mr-1" />
+                <span className="text-sm">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
+              </div>
             </div>
-            <div className="flex items-center">
-              <Users className="w-4 h-4 mr-1" />
-              <span className="text-sm">{matchNight.participants_count} deelnemers</span>
-            </div>
-            <div className="flex items-center">
-              <Play className="w-4 h-4 mr-1" />
-              <span className="text-sm">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
-            </div>
-          </div>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          {/* Status Badge */}
-          <div className="flex items-center space-x-2">
-            {loadingGameStatus ? (
-              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                <Clock className="w-5 h-5" />
-                <span className="font-medium text-sm">Laden...</span>
-              </div>
-            ) : isGameCompleted() ? (
-              <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
-                <Trophy className="w-5 h-5" />
-                <span className="font-medium text-sm">Spel Afgerond</span>
-              </div>
-            ) : gameStatus?.game_active ? (
-              <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
-                <Play className="w-5 h-5" />
-                <span className="font-medium text-sm">
-                  Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
-                </span>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
-                <Clock className="w-5 h-5" />
-                <span className="font-medium text-sm">Niet Gestart</span>
-              </div>
-            )}
           </div>
           
-          {/* Alleen creator kan bewerken - niet voor afgeronde spellen */}
-          {isCreator() && !isGameCompleted() && (
-            <button
-              onClick={() => navigate(`/match-nights/${id}/edit`)}
-              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
-              title="Bewerken"
-            >
-              <Edit className="w-4 h-4" />
-            </button>
-          )}
+          <div className="flex items-center space-x-4">
+            {/* Status Badge */}
+            <div className="flex items-center space-x-2">
+              {loadingGameStatus ? (
+                <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-medium text-sm">Laden...</span>
+                </div>
+              ) : isGameCompleted() ? (
+                <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
+                  <Trophy className="w-5 h-5" />
+                  <span className="font-medium text-sm">Spel Afgerond</span>
+                </div>
+              ) : gameStatus?.game_active ? (
+                <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
+                  <Play className="w-5 h-5" />
+                  <span className="font-medium text-sm">
+                    Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-medium text-sm">Niet Gestart</span>
+                </div>
+              )}
+            </div>
+            
+            {/* Alleen creator kan bewerken - niet voor afgeronde spellen */}
+            {isCreator() && !isGameCompleted() && (
+              <button
+                onClick={() => navigate(`/match-nights/${id}/edit`)}
+                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
+                title="Bewerken"
+              >
+                <Edit className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
