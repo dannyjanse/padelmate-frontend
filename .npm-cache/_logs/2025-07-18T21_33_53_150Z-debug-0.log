@@ -1,0 +1,25 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.8.2
+2 info using node@v20.17.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\JanseDanny\OneDrive\Documenten Danny\Lead Data Engineer\AI development\padelmate\frontend\.npmrc
+5 warn config production Use `--omit=dev` instead.
+6 silly config load:file:C:\Users\JanseDanny\.npmrc
+7 silly config load:file:C:\Users\JanseDanny\AppData\Roaming\npm\etc\npmrc
+8 verbose title npm run build
+9 verbose argv "run" "build"
+10 verbose logfile logs-max:10 dir:C:\Users\JanseDanny\OneDrive\Documenten Danny\Lead Data Engineer\AI development\padelmate\frontend\.npm-cache\_logs\2025-07-18T21_33_53_150Z-
+11 verbose logfile C:\Users\JanseDanny\OneDrive\Documenten Danny\Lead Data Engineer\AI development\padelmate\frontend\.npm-cache\_logs\2025-07-18T21_33_53_150Z-debug-0.log
+12 silly logfile done cleaning log files
+13 http fetch GET 200 https://registry.npmjs.org/npm 235ms
+14 verbose cwd C:\Users\JanseDanny\OneDrive\Documenten Danny\Lead Data Engineer\AI development\padelmate\frontend
+15 verbose os Windows_NT 10.0.26100
+16 verbose node v20.17.0
+17 verbose npm  v10.8.2
+18 notice
+18 notice New [31mmajor[39m version of npm available! [31m10.8.2[39m -> [34m11.4.2[39m
+18 notice Changelog: [34mhttps://github.com/npm/cli/releases/tag/v11.4.2[39m
+18 notice To update run: [4mnpm install -g npm@11.4.2[24m
+18 notice  { force: true, [Symbol(proc-log.meta)]: true }
+19 verbose exit 0
+20 info ok
