@@ -8,6 +8,23 @@
       "destination": "/index.html"
     }
   ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
   "env": {
     "VITE_API_BASE_URL": "https://padelmate-backend.onrender.com"
   }
