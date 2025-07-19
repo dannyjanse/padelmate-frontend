@@ -18,7 +18,8 @@ import {
   UserPlus,
   UserMinus,
   Crown,
-  Target
+  Target,
+  Gamepad2
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
@@ -395,7 +396,7 @@ const MatchNightDetails = () => {
                     <span className="font-medium text-sm">Laden...</span>
                   </div>
                 ) : isGameCompleted() ? (
-                  <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
+                  <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
                     <Trophy className="w-5 h-5" />
                     <span className="font-medium text-sm">Spel Afgerond</span>
                   </div>
@@ -413,23 +414,23 @@ const MatchNightDetails = () => {
                   </div>
                 )}
               </div>
-              
-              {/* Alleen creator kan bewerken - niet voor afgeronde spellen */}
-              {isCreator() && !isGameCompleted() && (
-                <button
-                  onClick={() => navigate(`/match-nights/${id}/edit`)}
-                  className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
-                  title="Bewerken"
-                >
-                  <Edit className="w-4 h-4" />
-                </button>
-              )}
             </div>
           </div>
 
           {/* Action buttons - alleen tonen als spel niet is afgerond */}
           {!isGameCompleted() && (
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2 border-t border-gray-100">
+              {/* Bewerken knop - alleen voor creator als spel nog niet gestart is */}
+              {isCreator() && !gameStatus?.game_active && (
+                <button
+                  onClick={() => navigate(`/match-nights/${id}/edit`)}
+                  className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
+                >
+                  <Edit className="w-3 h-3" />
+                  <span>Bewerken</span>
+                </button>
+              )}
+
               {/* Start Padelavond knop - alleen voor creator */}
               {isCreator() && matchNight.participants_count >= 4 && !gameStatus?.game_active && (
                 <button
@@ -494,7 +495,7 @@ const MatchNightDetails = () => {
         <div className="card">
           <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <Award className="w-5 h-5 mr-2" />
-            Spelstanden
+            Ranglijst
           </h2>
           {getSortedPlayerStats().length > 0 ? (
             <div className="space-y-3">
@@ -537,7 +538,7 @@ const MatchNightDetails = () => {
           <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
             <div className="flex-1">
               <label htmlFor="user-select" className="block text-sm font-medium text-gray-700 mb-2">
-                Selecteer Gebruiker
+                Selecteer Deelnemer
               </label>
               <select
                 id="user-select"
@@ -546,7 +547,7 @@ const MatchNightDetails = () => {
                 className="input-field w-full"
                 disabled={availableUsers.length === 0}
               >
-                <option value="">Kies een gebruiker...</option>
+                <option value="">Kies een deelnemer...</option>
                 {availableUsers.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.name} ({user.email})
@@ -612,7 +613,10 @@ const MatchNightDetails = () => {
       {/* Matches - alleen tonen als er wedstrijden zijn */}
       {matchNight.matches && matchNight.matches.length > 0 && (
         <div className="card">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Wedstrijden</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <Gamepad2 className="w-5 h-5 mr-2" />
+            Wedstrijden
+          </h2>
           
           <div className="space-y-4">
             {matchNight.matches.map((match: Match) => (

@@ -24,7 +24,7 @@ const Layout = () => {
                   alt="King of the Court Logo" 
                   className="w-14 h-14 object-contain"
                 />
-                <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">King of the Court</span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">King of the Court</span>
               </Link>
             </div>
 

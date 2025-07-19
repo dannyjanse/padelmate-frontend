@@ -265,7 +265,7 @@ const Dashboard = () => {
 
       {/* Match Nights Card */}
       <div className="card">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Padelavonden</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Padelavonden</h2>
         
         {matchNights.length === 0 ? (
           <div className="text-center py-8">
