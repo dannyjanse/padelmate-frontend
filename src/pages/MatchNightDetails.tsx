@@ -58,7 +58,7 @@ const MatchNightDetails = () => {
     {
       id: 'everyone_vs_everyone',
               name: 'Iedereen met iedereen',
-      description: 'Alle spelers spelen tegen elkaar in verschillende combinaties',
+      description: 'Iedereen speelt 1 pot met elkaar',
       icon: 'Target'
     },
     {
@@ -323,6 +323,25 @@ const MatchNightDetails = () => {
     return matchNight?.game_status === 'completed';
   };
 
+  const getSortedMatches = () => {
+    if (!matchNight?.matches) return [];
+    
+    return [...matchNight.matches].sort((a, b) => {
+      // Eerst sorteren op ronde (nieuwste bovenaan)
+      if (a.round !== b.round) {
+        return b.round - a.round;
+      }
+      
+      // Dan sorteren op baan
+      if (a.court !== b.court) {
+        return a.court - b.court;
+      }
+      
+      // Als laatste sorteren op ID (nieuwste bovenaan)
+      return b.id - a.id;
+    });
+  };
+
   // Filter out users who are already participating
   const availableUsers = allUsers.filter(user => 
     !matchNight?.participants?.some(p => p.id === user.id)
@@ -558,9 +577,9 @@ const MatchNightDetails = () => {
             <button
               onClick={handleAddParticipant}
               disabled={!selectedUserId || addingParticipant || availableUsers.length === 0}
-              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <UserPlus className="w-4 h-4" />
+              <UserPlus className="w-3 h-3" />
               <span>{addingParticipant ? 'Toevoegen...' : 'Toevoegen'}</span>
             </button>
           </div>
@@ -619,7 +638,7 @@ const MatchNightDetails = () => {
           </h2>
           
           <div className="space-y-4">
-            {matchNight.matches.map((match: Match) => (
+            {getSortedMatches().map((match: Match) => (
               <div key={match.id} className="border rounded-lg p-4">
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center space-x-2">
