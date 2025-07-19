@@ -4,7 +4,6 @@ import { matchNightsAPI, authAPI, gameSchemasAPI, matchesAPI } from '../services
 import { useAuth } from '../contexts/AuthContext';
 import type { MatchNight, Match, User, GameMode } from '../types';
 import {
-  ArrowLeft,
   MapPin,
   Users,
   Play,
