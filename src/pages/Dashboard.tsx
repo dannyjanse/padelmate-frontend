@@ -234,9 +234,9 @@ const Dashboard = () => {
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <button
             onClick={() => navigate('/match-nights/new')}
-            className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-2 text-sm"
+            className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3 h-3" />
             <span>Nieuwe Padelavond</span>
           </button>
           
@@ -278,7 +278,7 @@ const Dashboard = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3 max-w-sm mx-auto sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
             {getSortedMatchNights().map((matchNight) => (
               <div
                 key={matchNight.id}

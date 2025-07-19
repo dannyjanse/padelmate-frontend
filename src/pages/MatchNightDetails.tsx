@@ -364,31 +364,22 @@ const MatchNightDetails = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center text-gray-600 hover:text-gray-900"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Terug</span>
-          </button>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              {formatDateTime(matchNight.date)}
-            </h1>
-            <div className="flex items-center space-x-4 text-gray-600 mt-1">
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-1" />
-                <span className="text-sm sm:text-base">{matchNight.location}</span>
-              </div>
-              <div className="flex items-center">
-                <Users className="w-4 h-4 mr-1" />
-                <span className="text-sm sm:text-base">{matchNight.participants_count} deelnemers</span>
-              </div>
-              <div className="flex items-center">
-                <Play className="w-4 h-4 mr-1" />
-                <span className="text-sm sm:text-base">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
-              </div>
+        <div>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+            {formatDateTime(matchNight.date)}
+          </h1>
+          <div className="flex items-center space-x-4 text-gray-600 mt-1">
+            <div className="flex items-center">
+              <MapPin className="w-4 h-4 mr-1" />
+              <span className="text-sm">{matchNight.location}</span>
+            </div>
+            <div className="flex items-center">
+              <Users className="w-4 h-4 mr-1" />
+              <span className="text-sm">{matchNight.participants_count} deelnemers</span>
+            </div>
+            <div className="flex items-center">
+              <Play className="w-4 h-4 mr-1" />
+              <span className="text-sm">{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
             </div>
           </div>
         </div>
@@ -397,26 +388,26 @@ const MatchNightDetails = () => {
           {/* Status Badge */}
           <div className="flex items-center space-x-2">
             {loadingGameStatus ? (
-              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-3 py-2 rounded-lg">
-                <Clock className="w-4 h-4" />
-                <span className="font-medium">Laden...</span>
+              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                <Clock className="w-5 h-5" />
+                <span className="font-medium text-sm">Laden...</span>
               </div>
             ) : isGameCompleted() ? (
-              <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 py-2 rounded-lg">
-                <Trophy className="w-4 h-4" />
-                <span className="font-medium">Spel Afgerond</span>
+              <div className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-3 rounded-lg">
+                <Trophy className="w-5 h-5" />
+                <span className="font-medium text-sm">Spel Afgerond</span>
               </div>
             ) : gameStatus?.game_active ? (
-              <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-3 py-2 rounded-lg">
-                <Play className="w-4 h-4" />
-                <span className="font-medium">
+              <div className="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-3 rounded-lg">
+                <Play className="w-5 h-5" />
+                <span className="font-medium text-sm">
                   Actief Spel '{gameStatus.game_schema.game_mode === 'everyone_vs_everyone' ? 'Iedereen met iedereen' : 'King of the Court'}'
                 </span>
               </div>
             ) : (
-              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-3 py-2 rounded-lg">
-                <Clock className="w-4 h-4" />
-                <span className="font-medium">Niet Gestart</span>
+              <div className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-4 py-3 rounded-lg">
+                <Clock className="w-5 h-5" />
+                <span className="font-medium text-sm">Niet Gestart</span>
               </div>
             )}
           </div>
@@ -425,10 +416,10 @@ const MatchNightDetails = () => {
           {isCreator() && !isGameCompleted() && (
             <button
               onClick={() => navigate(`/match-nights/${id}/edit`)}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
+              title="Bewerken"
             >
               <Edit className="w-4 h-4" />
-              <span>Bewerken</span>
             </button>
           )}
         </div>
@@ -449,9 +440,9 @@ const MatchNightDetails = () => {
             <button
               onClick={() => setShowGameModal(true)}
               disabled={startingGame}
-              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <Play className="w-4 h-4" />
+              <Play className="w-3 h-3" />
               <span>{startingGame ? 'Spel starten...' : 'Start Padelavond'}</span>
             </button>
           )}
@@ -461,9 +452,9 @@ const MatchNightDetails = () => {
             <button
               onClick={() => setShowGameModal(true)}
               disabled={startingGame}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <Play className="w-4 h-4" />
+              <Play className="w-3 h-3" />
               <span>{startingGame ? 'Spel starten...' : 'Nieuw Spel Starten'}</span>
             </button>
           )}
@@ -473,9 +464,9 @@ const MatchNightDetails = () => {
             <button
               onClick={handleCompleteGame}
               disabled={completingGame}
-              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <CheckCircle className="w-4 h-4" />
+              <CheckCircle className="w-3 h-3" />
               <span>{completingGame ? 'Afronden...' : 'Spel Afronden'}</span>
             </button>
           )}
@@ -485,9 +476,9 @@ const MatchNightDetails = () => {
             <button
               onClick={handleRecalculateStats}
               disabled={recalculatingStats}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-1.5 px-2 text-xs"
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className="w-3 h-3" />
               <span>{recalculatingStats ? 'Herberekenen...' : 'Herbereken Stand'}</span>
             </button>
           )}
