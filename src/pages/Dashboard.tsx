@@ -221,20 +221,20 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
             Welkom, {user?.name}!
           </h1>
-          <p className="text-gray-600 mt-1">Beheer je padelavonden</p>
+          <p className="text-sm text-gray-600 mt-1">Beheer je padelavonden</p>
         </div>
         
-        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <button
             onClick={() => navigate('/match-nights/new')}
-            className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto"
+            className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto py-2 text-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Nieuwe Padelavond</span>
@@ -245,7 +245,7 @@ const Dashboard = () => {
             <button
               onClick={handleFixSchema}
               disabled={fixingSchema}
-              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto"
+              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:w-auto py-2 text-sm"
             >
               <Wrench className="w-4 h-4" />
               <span>{fixingSchema ? 'Bezig...' : 'Fix Database'}</span>
@@ -256,47 +256,45 @@ const Dashboard = () => {
 
       {/* Error message */}
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-md text-sm">
           {error}
         </div>
       )}
 
-
-
       {/* Match Nights */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Padelavonden</h2>
+      <div className="space-y-3">
+        <h2 className="text-lg font-semibold text-gray-900">Padelavonden</h2>
         
         {matchNights.length === 0 ? (
-          <div className="text-center py-12">
-            <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Geen padelavonden</h3>
-            <p className="text-gray-500 mb-4">Maak je eerste padelavond aan om te beginnen</p>
+          <div className="text-center py-8">
+            <Calendar className="w-8 h-8 text-gray-400 mx-auto mb-3" />
+            <h3 className="text-base font-medium text-gray-900 mb-2">Geen padelavonden</h3>
+            <p className="text-sm text-gray-500 mb-3">Maak je eerste padelavond aan om te beginnen</p>
             <button
               onClick={() => navigate('/match-nights/new')}
-              className="btn-primary"
+              className="btn-primary py-2 text-sm"
             >
               Eerste Padelavond Aanmaken
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {getSortedMatchNights().map((matchNight) => (
               <div
                 key={matchNight.id}
-                className="card hover:shadow-lg transition-shadow cursor-pointer"
+                className="card hover:shadow-lg transition-shadow cursor-pointer p-3"
                 onClick={() => navigate(`/match-nights/${matchNight.id}`)}
               >
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-sm font-semibold text-gray-900 mb-1">
                       {formatDateTime(matchNight.date)}
                     </h3>
                     <div className="flex items-center text-gray-600 mb-2">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      <span className="text-sm">{matchNight.location}</span>
+                      <MapPin className="w-3 h-3 mr-1" />
+                      <span className="text-xs">{matchNight.location}</span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <div className="flex items-center text-xs text-gray-500">
                       {getGameStatusIcon(matchNight.game_status)}
                       {getGameStatusText(matchNight.game_status)}
                     </div>
@@ -309,37 +307,35 @@ const Dashboard = () => {
                       <button
                         onClick={(e) => handleLeaveMatchNight(matchNight, e)}
                         disabled={leavingMatchNight === matchNight.id}
-                        className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md transition-colors"
+                        className="p-1 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors"
                         title={matchNight.creator_id === user?.id ? "Creator overdragen en afmelden" : "Afmelden"}
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3 h-3" />
                       </button>
                     )}
-                    
-
                     
                     {/* Delete button for creators - any status */}
                     {matchNight.creator_id === user?.id && (
                       <button
                         onClick={(e) => handleDeleteForAll(matchNight.id, e)}
                         disabled={deletingMatchNight === matchNight.id}
-                        className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-colors"
+                        className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
                         title="Verwijder padelavond"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3 h-3" />
                       </button>
                     )}
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <div className="flex items-center space-x-3">
                     <div className="flex items-center">
-                      <Users className="w-4 h-4 mr-1" />
+                      <Users className="w-3 h-3 mr-1" />
                       <span>{matchNight.participants_count} deelnemers</span>
                     </div>
                     <div className="flex items-center">
-                      <Play className="w-4 h-4 mr-1" />
+                      <Play className="w-3 h-3 mr-1" />
                       <span>{matchNight.num_courts} baan{matchNight.num_courts > 1 ? 'en' : ''}</span>
                     </div>
                   </div>
