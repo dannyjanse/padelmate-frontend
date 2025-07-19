@@ -819,15 +819,22 @@ const MatchNightDetails = () => {
                       Team 1 Games
                     </label>
                     <input
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       id="team1_games"
-                      min="0"
-                      max="10"
-                      value={resultData.team1_games}
-                      onChange={(e) => setResultData(prev => ({ 
-                        ...prev, 
-                        team1_games: parseInt(e.target.value) || 0 
-                      }))}
+                      placeholder="0"
+                      value={resultData.team1_games || ''}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        const numValue = value === '' ? 0 : parseInt(value);
+                        if (!isNaN(numValue) && numValue >= 0 && numValue <= 10) {
+                          setResultData(prev => ({ 
+                            ...prev, 
+                            team1_games: numValue 
+                          }));
+                        }
+                      }}
                       className="input-field w-full"
                     />
                   </div>
@@ -836,15 +843,22 @@ const MatchNightDetails = () => {
                       Team 2 Games
                     </label>
                     <input
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       id="team2_games"
-                      min="0"
-                      max="10"
-                      value={resultData.team2_games}
-                      onChange={(e) => setResultData(prev => ({ 
-                        ...prev, 
-                        team2_games: parseInt(e.target.value) || 0 
-                      }))}
+                      placeholder="0"
+                      value={resultData.team2_games || ''}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        const numValue = value === '' ? 0 : parseInt(value);
+                        if (!isNaN(numValue) && numValue >= 0 && numValue <= 10) {
+                          setResultData(prev => ({ 
+                            ...prev, 
+                            team2_games: numValue 
+                          }));
+                        }
+                      }}
                       className="input-field w-full"
                     />
                   </div>
